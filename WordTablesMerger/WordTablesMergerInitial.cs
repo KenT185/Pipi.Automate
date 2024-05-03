@@ -10,7 +10,7 @@
 //     * IMPORTANT: Merged document includes header and first row from the first table. 
 //     * However, it doesn't take header and the first row from all other tables (documents).
 //     */
-//    public class WordTableMergerWorkedBackup
+//    public class WordTablesMergerInitial
 //    {
 //        private static string _sourceDirectory;
 //        private static List<string> _sourcePaths;
@@ -22,7 +22,7 @@
 //            InitializeLogger();
 //            InitializeAndValidateFiles();
 
-//            WordTableMergerWorkedBackup merger = new();
+//            WordTablesMergerInitial merger = new();
 //            merger.MergeDocxTables();
 
 //            Log.CloseAndFlush();

@@ -1,8 +1,10 @@
-﻿public static class Common
+﻿namespace WordTablesMerger
 {
-    public static string PrintPipi()
+    public static class Common
     {
-        return @"
+        public static string PrintPipi()
+        {
+            return @"
                 /\     /\
                 {  `---'  }
                 {  O   O  }
@@ -15,5 +17,6 @@
                 \__/  /(_/     \__/
                     (__/
         ";
+        }
     }
 }

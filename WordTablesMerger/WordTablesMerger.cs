@@ -31,7 +31,7 @@ public class WordTablesMerger
 
     private static void InitializeAndValidateFiles()
     {
-        _sourceDirectory = @"C:\Projects\Pipi.Automate\files\source2";
+        _sourceDirectory = @"C:\Users\kkami\Desktop\sandra-merge\source2";
         if (!Directory.Exists(_sourceDirectory))
         {
             Log.Error("The source directory does not exist: {0}", _sourceDirectory);

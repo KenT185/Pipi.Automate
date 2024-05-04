@@ -35,27 +35,40 @@ namespace WordTablesMerger
 
         private static void InitializeAndValidateFiles()
         {
-            Console.Write("You will be prompted to enter the directory path where .docx files are placed. Keep there only files which you want to merge!\n");
-            Console.Write("Enter directory path: ");
-            _sourceDirectory = Console.ReadLine();
+            Console.WriteLine("You will be prompted to enter the directory path where .docx files are placed. Keep there only files which you want to merge!");
 
-            if (!Directory.Exists(_sourceDirectory))
+            bool isValidDirectory = false;
+            while (!isValidDirectory)
             {
-                Log.Error($"Given source directory {_sourceDirectory} does not exist. Process terminated.");
-                Environment.Exit(1);
+                Console.Write("Enter directory path: ");
+                _sourceDirectory = Console.ReadLine();
+
+                if (!Directory.Exists(_sourceDirectory))
+                {
+                    Log.Error($"Given source directory {_sourceDirectory} does not exist. Try again.");
+                    continue;
+                }
+
+                isValidDirectory = true;
             }
 
-            _sourceFilePaths = Directory.GetFiles(_sourceDirectory, "*.docx")
-                .OrderBy(path => path)
-                .ToList();
+            _sourceFilePaths = Directory.GetFiles(_sourceDirectory, "*.docx").OrderBy(path => path).ToList();
             if (!_sourceFilePaths.Any())
             {
-                Log.Error("No .docx files found in the source directory. Process terminated.");
+                Log.Error("No .docx files found in the source directory. Process terminated. Press any key to exit.");
+                Console.ReadLine();
                 Environment.Exit(1);
             }
 
             _targetFilePath = Path.Combine(_sourceDirectory, "merged-file.docx");
+            if (File.Exists(_targetFilePath))
+            {
+                Log.Error($"Target file {_targetFilePath} already exists. Please remove this file or move to another directory. Process terminated. Press any key to exit.");
+                Console.ReadLine();
+                Environment.Exit(1);
+            }
         }
+
 
         private void MergeDocxTables()
         {

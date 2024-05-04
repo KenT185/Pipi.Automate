@@ -172,8 +172,6 @@ namespace WordTablesMerger
         private void RemoveNewLineForCell(TableCell cell, int cellNumber, RunProperties fontProperties)
         {
             var cleanedText = GetCleanedTextFromCell(cell);
-
-            // For the 10th column we need to apply specific modifications
             if (cellNumber == 9)
             {
                 var pattern = @"^\d{4}\sPL\d+";
@@ -183,7 +181,6 @@ namespace WordTablesMerger
 
             cell.RemoveAllChildren<Paragraph>();
 
-            // Clone the font properties for each new run
             var runPropertiesClone = (RunProperties)fontProperties.Clone();
             var run = new Run(runPropertiesClone, new Text(cleanedText));
             var newParagraph = new Paragraph(run);
@@ -219,7 +216,6 @@ namespace WordTablesMerger
                     var cellProperties = cell.Elements<TableCellProperties>().First();
                     cellProperties.Shading = new Shading() { Fill = "FFFF00" };
                 }
-                // If no TableCellProperties, create and append it
                 else
                 {
                     cell.Append(new TableCellProperties(new Shading() { Fill = "FFFF00" }));
